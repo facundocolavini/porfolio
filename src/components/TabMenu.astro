@@ -1,14 +1,39 @@
-<div
-  class="relative w-max mx-auto h-12 grid grid-cols-3 px-[3xl] rounded-full overflow-hidden shadow-2xl shadow-900/20 "
->
-<button>
-    <span>Tab 1 </span>
-</button>
-<button>
-    <span>Tab 2 </span>
-</button>
-<button>
-    <span>Tab 3 </span>
-</button>
+---
+import NextJS from "@icons/NextJS.astro";
+---
 
+<div class="navigation">
+  <ul>
+    <li class="list">
+      <a href="#">
+        <NextJS class="size-4 text-white fill-white"/>
+        <span class="title">Experience</span>
+      </a>
+    </li>
+    <li class="list">
+      <a href="#">
+        <span class="icon"></span>
+
+        <span class="title">Projects</span>
+      </a>
+    </li>
+    <li class="list">
+      <a href="#">
+        <span class="icon"></span>
+
+        <span class="title">About</span>
+      </a>
+    </li>
+    <li class="list">
+        <a href="#">
+          <span class="icon"></span>
+  
+          <span class="title">Contact</span>
+        </a>
+      </li>
+  </ul>
 </div>
+
+<style>
+
+</style>
