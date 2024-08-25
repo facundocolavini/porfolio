@@ -139,21 +139,21 @@ import { Icon } from "astro-icon/components";
 
 </style>
 <script>
-document.addEventListener('astro:page-load', () => {
-    const list = document.querySelectorAll('.list');
-    const indicator = document.querySelector('.indicator');
+    document.addEventListener('astro:page-load', () => {
+        const list = document.querySelectorAll('.list');
+        const indicator = document.querySelector('.indicator') as HTMLElement;
     
-    function activeLink(this: any) {
-        list.forEach((item) => item.classList.remove('active'));
-        this.classList.add('active');
-        
-        const index = Array.from(list).indexOf(this);
-        indicator!.style.transform = `translateX(calc(70px * ${index}))`;
-    }
-
-    list.forEach((item) =>
-        item.addEventListener('click', activeLink)
-    );
-});
-
-</script>
+        function activeLink(this: HTMLElement) {
+            list.forEach((item) => (item as HTMLElement).classList.remove('active'));
+            this.classList.add('active');
+    
+            const index = Array.from(list).indexOf(this);
+            indicator.style.transform = `translateX(calc(70px * ${index}))`;
+        }
+    
+        list.forEach((item) =>
+            item.addEventListener('click', activeLink)
+        );
+    });
+    </script>
+    
