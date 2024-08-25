@@ -6,23 +6,28 @@ export const  navItems:NavItem[] = [
         title: 'Experience',
         label: 'experience',
         url: '/#experience',
+        icon: 'user'
     },
     {
       
         title: 'Projects',
         label: 'projects',
         url: '/#projects',
+           icon: 'code' 
     },
     {
        
         title: 'About',
         label: 'about',
         url: '/#about',
+        icon: 'user' 
     },
     {
         
         title: 'Contact',
         label: 'contact',
         url: '/#contact',
+        icon: 'user' 
     },
+    
 ]

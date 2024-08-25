@@ -1,0 +1,159 @@
+---
+import { navItems } from "@constants/navigation";
+import type { NavItem } from "@interfaces/nav-items";
+import { Icon } from "astro-icon/components";
+---
+<nav>
+<div class="navigation lg:hidden md:hidden">
+<ul>
+    {navItems.map(({ url, title, label,icon }: NavItem) => (
+        <li class="list">
+            <a href={url} aria-label={label}>
+                <span class="icon"><Icon  name={icon} size={25} /></span>
+                <span class="text text-white z-20">{title}</span>
+            </a>
+        </li>
+  ))}
+  <div class="indicator"></div>
+</ul>
+</div>
+</nav>
+
+
+
+<style>
+ nav{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: bottom 0.35s cubic-bezier(0.485, -0.050, 0.285, 1.505);
+    pointer-events: auto;
+ }
+ .navigation{
+    position: relative;
+    width: 400px;
+    height: 70px;
+    height: 100%;
+    background: linear-gradient(90deg, #1C1C1C, #333333 38%, #333333 49%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:10px;
+ }
+
+ .navigation  ul{
+    display:flex;
+   /*  width: 320px; */
+    margin: 0 auto;
+ }
+
+ .navigation ul li {
+    position: relative;
+    list-style: none;
+    z-index:1;
+    width: 70px;
+    height:70px;
+ }
+
+.navigation ul li a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:  100%;
+    height: 100%;
+    text-align: center;
+    font-weight: 500;
+}
+
+.navigation  ul li a .icon {
+    position: relative;
+    display: block;
+    line-height: 75px;
+    font-size: 1.5em;
+    text-align: center;
+    transition: 0.5s;
+    color : white;
+
+}
+
+.navigation  ul li a .icon {
+    transform: translateY(-15px);
+}
+.navigation ul li a .text {
+    position : absolute;
+    color: white;
+    font-weight: 400;
+    font-size: 0.75em;
+    letter-spacing: 0.05em;
+    transition : 0.5s;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.navigation ul li.active a text {
+    opacity: 1;
+    transform: translateY(10px);
+}
+
+.indicator{
+    position:absolute;
+    top: -50%;
+    width: 70px;
+    height: 70px;
+    background: grey;
+    border-radius: 50%;
+    border: 6px solid   #121212;
+    transition: 0.5s
+}
+.indicator::before{
+    content:'';
+    position: absolute;
+    top:50%;
+    left:-22px;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border-top-right-radius: 20px;
+    box-shadow: -0px -10px 0 0  #121212;
+}
+.indicator::after{
+    content:'';
+    position: absolute;
+    top:50%;
+    right:-22px;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border-top-left-radius: 20px;
+    box-shadow: -1px -10px 0 0  #121212;
+}
+
+
+
+</style>
+<script>
+document.addEventListener('astro:page-load', () => {
+    const list = document.querySelectorAll('.list');
+    const indicator = document.querySelector('.indicator');
+    
+    function activeLink(this: any) {
+        list.forEach((item) => item.classList.remove('active'));
+        this.classList.add('active');
+        
+        const index = Array.from(list).indexOf(this);
+        indicator!.style.transform = `translateX(calc(70px * ${index}))`;
+    }
+
+    list.forEach((item) =>
+        item.addEventListener('click', activeLink)
+    );
+});
+
+</script>
