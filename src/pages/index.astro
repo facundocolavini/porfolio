@@ -1,22 +1,21 @@
 ---
+import SectionContainer from '@components/SectionContainer.astro';
 import Layout from '../layouts/Layout.astro';
 
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-		
-	</main>
+<Layout title="My Porfolio | Facundo Colavini">
+	<SectionContainer id="experience" class="text-center h-[100vh]">
+		<h1>Experience</h1>
+	</SectionContainer>
+	<SectionContainer id="projects" class="text-center h-[100vh]">
+		<h1>Projects</h1>
+	</SectionContainer>
+	<SectionContainer id="about" class="text-center h-[100vh]">
+		<h1>About</h1>
+	</SectionContainer>
+	<SectionContainer id="contact" class="text-center h-[100vh]">
+		<h1>Contact</h1>
+	</SectionContainer>
 </Layout>
 
-<style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 20px;
-		line-height: 1.6;
-	}
-</style>

@@ -1,39 +1,163 @@
 ---
-import NextJS from "@icons/NextJS.astro";
+import { navItems } from "@constants/navigation";
+import type { NavItem } from "@interfaces/nav-items";
 ---
 
-<div class="navigation">
-  <ul>
-    <li class="list">
-      <a href="#">
-        <NextJS class="size-4 text-white fill-white"/>
-        <span class="title">Experience</span>
-      </a>
-    </li>
-    <li class="list">
-      <a href="#">
-        <span class="icon"></span>
-
-        <span class="title">Projects</span>
-      </a>
-    </li>
-    <li class="list">
-      <a href="#">
-        <span class="icon"></span>
-
-        <span class="title">About</span>
-      </a>
-    </li>
-    <li class="list">
-        <a href="#">
-          <span class="icon"></span>
-  
-          <span class="title">Contact</span>
-        </a>
-      </li>
-  </ul>
-</div>
+<nav class="container">
+  <div class="tabs">
+    {navItems.map(({ url, title, label }: NavItem) => (
+      <a href={url} class="tab" aria-label={label}>{title}</a>
+    ))}
+    <span class="glider"></span>
+  </div>
+</nav>
 
 <style>
+  * {
+    box-sizing: border-box;
+  }
 
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .tabs {
+    display: flex;
+    position: relative;
+    background: linear-gradient(90deg, #1C1C1C, #333333 38%, #333333 49%);
+    border: 1px solid #808080;
+    color: white;
+    padding: 0.3rem 0.3rem;
+    border-radius: 99px;
+  }
+
+  .tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 33px;
+    width: 120px;
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 99px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.15s ease-in;
+    color: white;
+    position: relative;
+    z-index: 2;
+  }
+
+  .tab.active {
+    color: black; /* Color del texto cuando está seleccionado */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .glider {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 33px;
+    width: 120px;
+    background: linear-gradient(90deg, #555954, #B7BFB5 49%, #DFE0DC );
+    border: 1px solid #DFE0DC;
+    z-index: 1;
+    border-radius: 99px;
+    transition: transform 0.25s ease-out; /* Ensure smooth transition */
+  }
 </style>
+
+<script>
+  document.addEventListener('astro:page-load', function () {
+    const navItems = document.querySelectorAll('header nav .tabs a') as NodeListOf<HTMLAnchorElement>;
+    const sections = document.querySelectorAll('section') as NodeListOf<HTMLElement>;
+    const tabs = document.querySelectorAll('.tab');
+    const glider = document.querySelector('.glider') as HTMLElement;
+
+    const cleanSelector = (href: string) => href.replace(/^\//, '');
+
+    const setActiveTab = (tab: HTMLAnchorElement) => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const tabIndex = Array.from(tabs).indexOf(tab);
+      glider.style.transform = `translateX(${tabIndex * 100}%)`;
+    };
+
+    const callback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const targetId = entry.target.id;
+          const cleanTargetId = cleanSelector(`#${targetId}`);
+          const currentTab = Array.from(navItems).find(item => cleanSelector(item.getAttribute('href') ?? '') === cleanTargetId);
+          if (currentTab) {
+            setActiveTab(currentTab as HTMLAnchorElement);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(callback, {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3,
+    });
+
+    sections.forEach(section => observer.observe(section));
+
+    document.onvisibilitychange = () => {
+      if (document.visibilityState === "hidden") {
+        observer.disconnect();
+      } else {
+        sections.forEach(section => observer.observe(section));
+      }
+    };
+
+    const scrollToSection = (href: string) => {
+      const target = document.querySelector(cleanSelector(href));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+
+    const handleClick = (event: MouseEvent) => {
+      event.preventDefault();
+      const clickedTab = event.currentTarget as HTMLAnchorElement;
+      setActiveTab(clickedTab);
+      scrollToSection(clickedTab.getAttribute('href') ?? '');
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', 
+       ()=>
+       {
+        setTimeout(() => setActiveTab(navItems[index] as HTMLAnchorElement), 1000);
+       
+       });
+    });
+    const updateActiveTabOnScroll = () => {
+      const scrollTop = window.scrollY;
+      const viewportHeight = window.innerHeight;
+
+      sections.forEach((section, index) => {
+        const { top, bottom } = section.getBoundingClientRect();
+        if (top < viewportHeight * 0.5 && bottom > viewportHeight * 0.5) {
+          setActiveTab(navItems[index] as HTMLAnchorElement);
+        }
+      });
+    };
+
+    window.addEventListener('scroll', updateActiveTabOnScroll);
+
+    // Initial call to ensure correct tab is active
+    updateActiveTabOnScroll();
+  });
+</script>
