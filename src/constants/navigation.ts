@@ -6,7 +6,7 @@ export const  navItems:NavItem[] = [
         title: 'Experience',
         label: 'experience',
         url: '/#experience',
-        icon: 'user'
+        icon: 'briefcase-2'
     },
     {
       
@@ -27,7 +27,7 @@ export const  navItems:NavItem[] = [
         title: 'Contact',
         label: 'contact',
         url: '/#contact',
-        icon: 'user' 
+        icon: 'mail' 
     },
     
 ]

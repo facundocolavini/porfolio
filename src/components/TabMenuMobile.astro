@@ -163,38 +163,67 @@ import { Icon } from "astro-icon/components";
 }
 </style>
 <script>
-document.addEventListener('astro:page-load', () => {
-  const sections = document.querySelectorAll('section') as NodeListOf<HTMLElement>;
-  const list = document.querySelectorAll('.list');
 
-  const indicator = document.querySelector('.indicator') as HTMLElement;
+  document.addEventListener('astro:page-load', () => {
+    const sections = document.querySelectorAll('section') as NodeListOf<HTMLElement>;
+    const list = document.querySelectorAll('.list');
+    const indicator = document.querySelector('.indicator') as HTMLElement;
 
-  /* Active the first element the first time */
-  list[0].classList.add('active');
+    /* Activa el primer elemento inicialmente */
+    list[0].classList.add('active');
 
-  function activeLink(index: number) {
-    list.forEach((item) => item.classList.remove('active'));
-    list[index].classList.add('active');
-    indicator.style.transform = `translateX(calc(70px * ${index}))`;
-  }
+    function activeLink(index: number) {
+      list.forEach((item) => item.classList.remove('active'));
+      list[index].classList.add('active');
+      indicator.style.transform = `translateX(calc(70px * ${index}))`;
+    }
 
-  list.forEach((item, index) => {
-    item.addEventListener('click', () => activeLink(index));
+    list.forEach((item, index) => {
+      item.addEventListener('click', () => {
+        setTimeout(() => activeLink(index), 1000);
+      });
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionIndex = Array.from(sections).indexOf(entry.target as HTMLElement);
+            activeLink(sectionIndex);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3,
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    document.onvisibilitychange = () => {
+      if (document.visibilityState === 'hidden') {
+        observer.disconnect();
+      } else {
+        sections.forEach((section) => observer.observe(section));
+      }
+    };
+
+    const updateActiveTabOnScroll = () => {
+      const viewportHeight = window.innerHeight;
+
+      sections.forEach((section, index) => {
+        const { top, bottom } = section.getBoundingClientRect();
+        if (top < viewportHeight * 0.5 && bottom > viewportHeight * 0.5) {
+          activeLink(index);
+        }
+      });
+    };
+
+    window.addEventListener('scroll', updateActiveTabOnScroll);
   });
 
-  const updateActiveTabOnScroll = () => {
-    const viewportHeight = window.innerHeight;
-
-    sections.forEach((section, index) => {
-      const { top, bottom } = section.getBoundingClientRect();
-      if (top < viewportHeight * 0.5 && bottom > viewportHeight * 0.5) {
-        activeLink(index);
-      }
-    });
-  };
-
-  window.addEventListener('scroll', updateActiveTabOnScroll);
-});
 
     </script>
     
