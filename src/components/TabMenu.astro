@@ -4,7 +4,7 @@ import type { NavItem } from "@interfaces/nav-items";
 import TabMenuMobile from "./TabMenuMobile.astro";
 ---
 
-<nav class="hidden md:flex">
+<nav class="md:flex">
   <div class="tabs">
     {navItems.map(({ url, title, label }: NavItem) => (
       <a href={url} class="tab" aria-label={label}>{title}</a>
@@ -76,8 +76,8 @@ import TabMenuMobile from "./TabMenuMobile.astro";
     border-radius: 99px;
     transition: transform 0.25s ease-out; /* Ensure smooth transition */
   }
-  @media screen and (max-width: 578px) {
-  .container {
+  @media screen and (max-width: 577px) {
+  nav {
     display: none;
   }
 }

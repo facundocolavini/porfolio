@@ -4,13 +4,13 @@ import type { NavItem } from "@interfaces/nav-items";
 import { Icon } from "astro-icon/components";
 ---
 <nav>
-<div class="navigation lg:hidden md:hidden">
+<div class="navigation">
 <ul>
     {navItems.map(({ url, title, label,icon }: NavItem) => (
         <li class="list">
             <a href={url} aria-label={label}>
-                <span class="icon"><Icon  name={icon} size={25} /></span>
-                <span class="text text-white z-20">{title}</span>
+               <Icon  class="icon" name={icon} size={25} />
+                <span class="text">{title}</span>
             </a>
         </li>
   ))}
@@ -50,11 +50,16 @@ import { Icon } from "astro-icon/components";
     display:flex;
    /*  width: 320px; */
     margin: 0 auto;
+
+    align-items: center;
  }
 
  .navigation ul li {
     position: relative;
     list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index:1;
     width: 70px;
     height:70px;
@@ -74,7 +79,10 @@ import { Icon } from "astro-icon/components";
 
 .navigation  ul li a .icon {
     position: relative;
-    display: block;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
     line-height: 75px;
     font-size: 1.5em;
     text-align: center;
@@ -83,9 +91,20 @@ import { Icon } from "astro-icon/components";
 
 }
 
-.navigation  ul li a .icon {
-    transform: translateY(-15px);
+.navigation ul li a .icon {
+    position: relative;
+    display: block;
+    line-height: 75px;
+    font-size: 1.5em;
+    text-align: center;
+    transition: 0.5s;
+    color: white;
 }
+
+.navigation ul li.active a .icon {
+    transform: translateY(-35px);
+}
+
 .navigation ul li a .text {
     position : absolute;
     color: white;
@@ -97,7 +116,7 @@ import { Icon } from "astro-icon/components";
     transform: translateY(20px);
 }
 
-.navigation ul li.active a text {
+.navigation ul li.active a .text {
     opacity: 1;
     transform: translateY(10px);
 }
@@ -136,24 +155,46 @@ import { Icon } from "astro-icon/components";
 }
 
 
-
+/* Ocultar si supera los 578px pantalla grande  */
+@media (min-width: 578px) {
+  .navigation {
+    display: none;
+  }
+}
 </style>
 <script>
-    document.addEventListener('astro:page-load', () => {
-        const list = document.querySelectorAll('.list');
-        const indicator = document.querySelector('.indicator') as HTMLElement;
-    
-        function activeLink(this: HTMLElement) {
-            list.forEach((item) => (item as HTMLElement).classList.remove('active'));
-            this.classList.add('active');
-    
-            const index = Array.from(list).indexOf(this);
-            indicator.style.transform = `translateX(calc(70px * ${index}))`;
-        }
-    
-        list.forEach((item) =>
-            item.addEventListener('click', activeLink)
-        );
+document.addEventListener('astro:page-load', () => {
+  const sections = document.querySelectorAll('section') as NodeListOf<HTMLElement>;
+  const list = document.querySelectorAll('.list');
+
+  const indicator = document.querySelector('.indicator') as HTMLElement;
+
+  /* Active the first element the first time */
+  list[0].classList.add('active');
+
+  function activeLink(index: number) {
+    list.forEach((item) => item.classList.remove('active'));
+    list[index].classList.add('active');
+    indicator.style.transform = `translateX(calc(70px * ${index}))`;
+  }
+
+  list.forEach((item, index) => {
+    item.addEventListener('click', () => activeLink(index));
+  });
+
+  const updateActiveTabOnScroll = () => {
+    const viewportHeight = window.innerHeight;
+
+    sections.forEach((section, index) => {
+      const { top, bottom } = section.getBoundingClientRect();
+      if (top < viewportHeight * 0.5 && bottom > viewportHeight * 0.5) {
+        activeLink(index);
+      }
     });
+  };
+
+  window.addEventListener('scroll', updateActiveTabOnScroll);
+});
+
     </script>
     
