@@ -1,26 +1,34 @@
 ---
-import SectionContainer from '@components/SectionContainer.astro';
-import Layout from '../layouts/Layout.astro';
+import Experience from '@/components/Experience.astro';
+import Hero from '@/components/Hero.astro';
+import SectionContainer from '@/components/SectionContainer.astro';
+import Layout from '@/layouts/Layout.astro';
 
 ---
 
 <Layout title="My Porfolio | Facundo Colavini">
-	<SectionContainer id="experience" class="text-center h-[100vh]">
-<!-- 		<div
-		class="absolute top-0 bottom-0 z-[-2] min-h-screen w-full bg-gray-50 dark:bg-gray-950
-	bg-[radial-gradient(ellipse_80%_40%_at_20%_-20%,rgba(85,18,137,0.22),rgba(28,28,28,0))]"
-	  >
-	  </div> -->
-		<h1>Experience</h1>
+	<SectionContainer id="experience" class=" py-16 md:py-36 relative">
+	<div 
+		class="w-full shrink-0 absolute  top-40  -z-50 rotate-[-7deg] py-[20px] blur-[150px] rounded-full h-[150px] lg:h-[150px] xl:h-[200px] 
+			   bg-[radial-gradient(circle,rgba(73,33,93,1)_0%,rgba(48,13,73,1)_49%,rgba(27,8,53,1)_100%)]">
+	</div>
+	<Hero/>
+	<div class="pt-16 md:pt-36 px-4 sm:px-8">
+		<h2 class="text-white text-2xl font-bold mb-2">Projects</h2>
+		<h3 class="text-4xl font-bold mb-2">Let's now delve into my </h3>
+		<h3 class="text-4xl font-bold">
+		  projects I've <span class="text-[#A855F7]">experience.</span> on.
+		</h3>
+	  </div>
+    <Experience/>	 
 	</SectionContainer>
-	<SectionContainer id="projects" class="text-center h-[100vh]">
-		<h1>Projects</h1>
+	<SectionContainer id="projects" class="my-40 py-16 md:py-36  h-[600px] ">	
+		<Hero/>
 	</SectionContainer>
-	<SectionContainer id="about" class="text-center h-[100vh]">
+	<SectionContainer id="about" class="text-center h-[100vh] py-16 md:py-36">
 		<h1>About</h1>
 	</SectionContainer>
-	<SectionContainer id="contact" class="text-center h-[100vh]">
+	<SectionContainer id="contact" class="text-center h-[100vh] py-16 md:py-36">
 		<h1>Contact</h1>
 	</SectionContainer>
 </Layout>
-

@@ -1,0 +1,52 @@
+---
+import profile from '@/assets/images/profile.png';
+import { Icon } from 'astro-icon/components';
+import Pill from './Pill.astro';
+---
+<!-- Desktop -->
+
+<!-- Desktop -->
+<div class="hidden md:flex gap-5 mx-auto w-full max-w-screen-xl px-4 sm:px-8 pb-16 md:pb-36">
+	<img  
+		src={profile.src} 
+		alt="profile"
+		class="rounded-full object-contain object-center flex size-50 relative z-2" 
+	/>
+	<div class="place-content-center">
+		<h1 class="text-4xl text-start font-bold tracking-tight text-white">
+			Hi, I'm Facundo 
+		</h1>
+		<p class="mt-6 w-full text-2xl text-start text-white  [&>strong]:text-[#4993ED] [&>strong]:font-semibold ">
+			+4 year experience.
+			<strong>Senior IT Technician and Programmer</strong> of Buenos Aires, Argentina. Specialized in create and design web applications.
+		</p>
+		<nav class="flex flex-wrap gap-4 mt-8">
+			<Pill href="https://www.linkedin.com/in/facundo-colavini/" variant="primary"><Icon name={'brand-linkedin'} size={20}/>LinkedIn</Pill>
+			<Pill href="https://github.com/facundocolavini" variant="primary"><Icon name={'brand-github'} size={20}/>Github</Pill>
+		</nav>
+	</div>
+</div>
+
+<!-- Mobile -->
+<div class="block md:hidden mb-4 max-w-screen-xl px-8 py-16 md:py-36"> <!-- Elimina md:hidden -->
+	<div class="flex gap-4">
+		<img  
+			src={profile.src} 
+			alt="profile"
+			class="rounded-full shadow-lg size-16"
+		/>
+		<h1 class="text-4xl text-start font-bold tracking-tight flex items-center transition md:justify-center text-balance ">
+			Hi, I'm Facundo 
+		</h1>
+		
+	</div>
+	<p class=" mt-6 w-full text-xl text-start text-white [&>strong]:text-[#4993ED] [&>strong]:font-semibold">
+		+4 year experience.
+		<strong>Senior IT Technician and Programmer</strong> of Buenos Aires, Argentina. Specialized in create and design web applications.
+	</p>
+	<nav class="flex flex-wrap gap-4 mt-8">
+		<Pill href="https://www.linkedin.com/in/facundo-colavini/" variant="primary"><Icon name={'brand-linkedin'} size={20}/>LinkedIn</Pill>
+		<Pill href="https://github.com/facundocolavini" variant="primary"><Icon name={'brand-github'} size={20}/>Github</Pill>
+	</nav>
+</div>
+

@@ -1,0 +1,40 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    icon: string;
+    title: string;
+    company: string;
+    period: string;
+    description: string;
+    color: string;
+    titleColor:string;
+    bullGradient:string;
+    gradient:string;
+}
+
+const { icon, title, company, period, description, color,titleColor,bullGradient,gradient } = Astro.props;
+---
+
+<div class="relative grid">
+    <div class="relative my-5 flex items-center justify-start">
+        <div class="relative flex items-center">
+            <div class={`absolute left-1/2 transform -translate-x-1/2 w-5 h-5 rounded-full  blur-[8px] ${bullGradient} z-0`}></div>
+            <Icon name={icon} class={`${color} relative z-10`} size={30} />
+        </div>
+        <div class="flex w-full justify-start gap-8 ml-4">
+            <h1 class={`text-2xl font-semibold ${titleColor}`}>{title}</h1>
+        </div>
+    </div>
+    <div
+        class={`relative mx-12 pb-12 grid before:absolute before:left-[-35px] before:block before:h-full before:w-1 ${gradient} md:grid-cols-5 md:gap-10 md:space-x-4`}
+    >
+        <div class="col-span-2 mb-3">
+            <p class="text-lg font-semibold">{company}</p>
+            {period && <p class="text-gray-400 text-lg mb-6">{period}...</p>}
+        </div>
+        <div class="md:col-start-3 col-span-4 md:flex">
+            <p class="text-lg leading-relaxed">{description}</p>
+        </div>
+    </div>
+</div>

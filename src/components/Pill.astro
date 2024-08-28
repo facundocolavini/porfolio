@@ -1,0 +1,31 @@
+---
+
+  
+
+// Define las variantes en un objeto
+const variantsPills: { [key: string]: string } = {
+  primary: 'bg-blue-600 text-white rounded-full hover:bg-blue-700 focus:ring focus:ring-blue-300 cursor-pointer border-[#4993ED] border-2 transition',
+  outline: 'bg-transparent border-2 border-blue-600 text-blue-600 rounded-full hover:bg-blue-600 hover:text-white focus:ring focus:ring-blue-300',
+  secondary: 'bg-purple-600 text-white rounded-full hover:bg-purple-700 focus:ring focus:ring-purple-300',
+  disabled: 'bg-gray-300 text-gray-500 cursor-not-allowed rounded-full',
+  black: 'bg-black text-white rounded-full hover:bg-gray-900 focus:ring focus:ring-gray-500',
+  white: 'bg-white text-black border-2 border-gray-300 rounded-full hover:bg-gray-100 focus:ring focus:ring-gray-200',
+};
+
+
+const { variant = 'primary' } = Astro.props;
+
+---
+<a
+  {...Astro.props}
+  target="_blank"
+  rel="noopener noreferrer"
+  role="link"
+  class:list={[
+    'flex items-center justify-center px-4 py-2 text-sm font-medium rounded-full gap-1',
+    variant ? variantsPills[variant] : '', // Validar antes de acceder al objeto
+  ]}
+>
+  <slot />
+</a>
+ 

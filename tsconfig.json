@@ -3,13 +3,15 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@styles/*": ["src/styles/*"],
-      "@utils/*": ["src/utils/*"],
-      "@constants/*": ["src/constants/*"],
-      "@interfaces/*": ["src/interfaces/*"],
-      "@assets/*": ["src/assets/*"],
-      "@icons/*": ["src/icons/*"]
+      "@/components/*": ["src/components/*"],
+      "@/styles/*": ["src/styles/*"],
+      "@/layouts/*": ["src/layouts/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/constants/*": ["src/constants/*"],
+      "@/interfaces/*": ["src/interfaces/*"],
+      "@/assets/*": ["src/assets/*"],
+      "@/icons/*": ["src/icons/*"],
+      "@/types/*": ["src/types/*"],
     }
   }
 }
