@@ -20,7 +20,7 @@ const { icon, title, company, period, description, color,bullGradient,gradient,i
     <div class="relative my-5 flex items-center justify-start">
         <div class="relative flex items-center">
             <div class={`absolute left-1/2 transform -translate-x-1/2 w-5 h-5 rounded-full  blur-[8px] ${bullGradient} z-0`}></div>
-            <Icon name={icon} class={`${color} relative z-10`} size={30} />
+            <Icon name={icon} class={`${color} relative `} size={30} />
         </div>
         <div class="flex w-full justify-start gap-8 ml-4">
             {typeof title === 'string' 
