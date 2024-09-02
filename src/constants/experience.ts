@@ -18,7 +18,7 @@ export const experiences = [
     gradient: 'before:bg-[linear-gradient(to_bottom,_#B7BFB5,_rgba(255,130,14,63),_rgba(221,140,23,80.58),_#FF6B00)]',
   },
   {
-    icon: 'astro',
+    icon: 'astro-grey',
     title: `<h3 class=" text-xl md:text-2xl text-[#FF6B00] font-bold">Frontend Engineer</h3>`,
     company: "Sounthern Horizon",
     period: "March 2022 - present",

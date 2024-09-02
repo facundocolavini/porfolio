@@ -1,6 +1,7 @@
 ---
 import { navItems } from "@/constants/navigation";
-import type { NavItem } from "@/interfaces/nav-items";
+import type { NavItem } from "@/interfaces/types";
+ 
 import { Icon } from "astro-icon/components";
 ---
 <nav>
@@ -30,6 +31,7 @@ import { Icon } from "astro-icon/components";
     bottom: 0px;
     display: flex;
     flex-direction: column;
+    
     align-items: center;
     transition: bottom 0.35s cubic-bezier(0.485, -0.050, 0.285, 1.505);
     pointer-events: auto;

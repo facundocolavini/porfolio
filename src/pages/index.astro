@@ -2,8 +2,11 @@
 import Card from '@/components/Card.astro';
 import Experience from '@/components/Experience.astro';
 import Hero from '@/components/Hero.astro';
+import Pill from '@/components/Pill.astro';
 import SectionContainer from '@/components/SectionContainer.astro';
+import { projects } from '@/constants/projects';
 import Layout from '@/layouts/Layout.astro';
+import { Icon } from 'astro-icon/components';
 
 ---
 
@@ -18,10 +21,21 @@ import Layout from '@/layouts/Layout.astro';
     <Experience/>	 
 	</SectionContainer>
 	<SectionContainer id="projects" class="mt-2 pb-16 md:pb-36  relative">
-		<div 
-		class="absolute top-[40%] right-1 -translate-y-1/2 w-[500px] h-[160px] rounded-full blur-[100px] bg-[radial-gradient(circle,rgba(73,33,93,1)_0%,rgba(48,13,73,1)_49%,rgba(27,8,53,1)_100%)]"
-	  ></div>
-		<Card/>
+		
+	
+			<!-- <div class="flex px-0 py-0 gap-2" slot='pills-stack'>
+			<Pill variant="black">
+				<Icon name="vercel" class="h-5 w-14"/>
+				
+			</Pill>
+			<Pill variant="white" class="py-1 flex  items-center rounded-full bg-[#FF6B00] text-black" >
+				<Icon name="astro-dark" class="h-full  "/>
+				Astro
+			</Pill>
+			</div> -->
+			{projects.map((project) => (
+				<Card project={project} />
+			))}
 	</SectionContainer>
 	<SectionContainer id="about" class="text-center h-[100vh] py-16 md:py-36">
 		<h1>About</h1>

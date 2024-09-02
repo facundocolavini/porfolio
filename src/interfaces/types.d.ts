@@ -6,3 +6,21 @@ export interface CallToAction extends Omit<HTMLAttributes<'a'>, 'slot'> {
 /*     class?: string; */
     type?: 'button' | 'submit' | 'reset';
   }
+  export interface NavItem {
+    title: string;
+    label:string
+    url: string;
+    icon?: string;
+}
+
+export interface Project {
+    title: string;
+    description: string;
+    previewUrl: string;
+    image: string;
+    tags: string[];
+    icons: string[];
+    pillClass?: string[];
+}
+
+ 

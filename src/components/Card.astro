@@ -1,35 +1,58 @@
 ---
-import project1 from '@/assets/images/ms-project-1.png'
+import { twMerge } from 'tailwind-merge';
+
+import type { Project } from '@/interfaces/types';
+import Pill from './Pill.astro';
+import { Icon } from 'astro-icon/components';
+
+
+interface Props {
+  isReversed?: boolean;
+  project: Project;
+}
+
+const { isReversed = false, project} = Astro.props;
+const { title,description,image,previewUrl,tags,icons,pillClass} = project
 ---
 
-<div class="relative flex items-center justify-center p-4 overflow-hidden ">
+<div class="relative flex items-center justify-center p-4">
+  <!-- Gradient Background -->
+  <div 
+    class="absolute inset-0 -left-[30%] top-20 object-cover bg-gradient-to-r from-transparent via-[rgba(73,33,93,0.1)] to-[rgba(73,33,93,1)] blur-[80px] md:w-full  h-[350px] lg:inset-0 md:h-[350px] md:place-content-center lg:h-full w-full -z-20"
+    aria-hidden="true">
+  </div>
 
-    
-    <div class="relative w-full max-w-5xl bg-[#1E1E2E]/30 backdrop-blur-md rounded-3xl  border-[#808080] border p-8 shadow-lg">
-      <div class="flex flex-col md:flex-row items-start justify-between">
-        <div class="text-white mb-6 md:mb-0 md:mr-8 flex-1">
-          <h1 class="text-4xl font-bold mb-4">Property Listings: Rentals & Sales Web App</h1>
-          <div class="flex space-x-2 mb-4">
-            <span class="bg-[#8652d4] text-white text-xs px-3 py-1 rounded-full flex items-center">
-              <svg class="w-4 h-4 mr-1" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M163.852 47.995c-10.058-8.935-23.522-14.357-38.292-14.357-29.876 0-54.129 24.253-54.129 54.129 0 2.715.212 5.379.608 7.981-34.927 2.307-61.849 20.302-61.849 41.756 0 23.219 30.558 42.077 68.214 42.077 3.686 0 7.305-.193 10.852-.554 13.487 11.766 30.859 18.921 49.848 18.921 23.404 0 44.14-10.682 57.944-27.392 31.125-1.214 55.77-19.175 55.77-40.956 0-22.685-29.138-41.157-65.577-41.97-5.39-22.23-24.675-39.635-48.389-39.635z" fill="#FFF"/></svg>
-              Astro
-            </span>
-            <span class="bg-black text-white text-xs px-3 py-1 rounded-full flex items-center">
-              <svg class="w-4 h-4 mr-1" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"><path d="M128 0C57.221 0 0 57.221 0 128c0 70.778 57.221 128 128 128 70.778 0 128-57.222 128-128V0H128z" fill="#FFF"/><path d="M212.934 218.781c-3.708 0-6.725-3.017-6.725-6.725V43.944c0-3.709 3.017-6.725 6.725-6.725h18.731c3.708 0 6.725 3.016 6.725 6.725v168.112c0 3.708-3.017 6.725-6.725 6.725h-18.731z" fill="#000"/><path d="M43.944 218.781h168.112V43.944H43.944v174.837z" fill="#000"/></svg>
-              Vercel
-            </span>
-          </div>
-          <p class="text-sm mb-6 opacity-90 max-w-lg">I developed a web application for real estate rentals and sales, featuring a modern design and user-friendly functionalities for intuitive property browsing and filtering</p>
-          <button class="bg-white text-[#1E1E2E] text-sm font-semibold py-2 px-6 rounded-full hover:bg-opacity-90 transition duration-300">
-            Preview
-          </button>
+  <div class="relative w-full max-w-5xl bg-[#1E1E2E]/30 rounded-3xl border-[#808080] border p-8 shadow-lg z-1">
+    <div class:list={[
+      "flex z-10 lg:flex-row flex-col-reverse items-start justify-between",
+      { 'lg:flex-row-reverse': isReversed },
+    ]}>
+      <div class="text-white md:mb-0 md:mr-8 flex-1 z-4">
+        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">{title}</h1>
+        <div class=" flex gap-2 mb-4 flex-wrap">
+          {
+            tags.map((tag, index) => (
+              <Pill  class={twMerge(`pl-1 pr-3 py-1 rounded-full flex items-center`,
+                pillClass ? pillClass[index] : '')}>
+                <Icon name={icons[index].toLowerCase()} class={`h-4 w-4 mr-1 ml-2`}/>
+                {tag}
+              </Pill>
+            ))
+          }
         </div>
-        <div class="w-full md:w-1/2 relative">
-        <img src={project1.src}  
-            class="w-full scale-150"
+        <p class="text-base md:text-sm lg:text-base mb-6">{description}</p>
+        <Pill href="#" class='bg-white text-black border-2 border-gray-300 rounded-full hover:bg-gray-300 transition focus:ring focus:ring-gray-400 w-fit flex items-center px-2 py-1 font-semibold cursor-pointer'>
+          Preview
+          <Icon name={'arrow-right'} class="h-4 w-4 mr-1 ml-2"/>
+        </Pill>
+      </div>
+
+      <div class="relative w-full lg:flex lg:w-1/2">
+        <img src={`${image}`}
+        
+          class="rounded-lg drop-shadow-lg z-1 h-full w-full" alt="Property Listings: Rentals & Sales Web App"
         />
-            
-        </div>
       </div>
     </div>
   </div>
+</div>
