@@ -28,7 +28,7 @@ export const  navItems:NavItem[] = [
         
         title: 'Contact',
         label: 'contact',
-        url: '/#contact',
+        url: 'mailto:facu_colavini@hotmail.com',
         icon: 'mail' 
     },
     

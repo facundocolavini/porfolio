@@ -9,7 +9,7 @@ export const projects: Project[] = [
         Developed a scalable structure for easy content management.
         `,
         previewUrl: "http://www.southernstar.com.ar/new/",
-        image: "src/assets/images/projects/project-1.png",
+        image: "/projects/project-1.png",
         pillClass:["bg-black","bg-white text-black fill-white","bg-[#2063B5]" ],
         icons: ["server","astro-bold","tailwindcss"],
         tags: ["cPanel", "Astro", "tailwindcss",],
@@ -25,7 +25,7 @@ export const projects: Project[] = [
         Implemented advanced search filters, optimized SEO, and integrated APIs.
         `,
         previewUrl: "https://new.matiasszpira.com.ar/",
-        image: "src/assets/images/projects/project-2.png",
+        image: "/projects/project-2.png",
         pillClass:["bg-black","bg-white text-black fill-white","bg-[#2063B5]","bg-[#2063B5]" ],
         icons: ["vercel","astro-bold","tailwindcss","react"],
         tags: ["Vercel", "Astro", "tailwindcss","react"],

@@ -10,9 +10,13 @@ import Layout from '@/layouts/Layout.astro';
 
 import { experiences } from "@/constants/experience";
 import { about } from "@/constants/about";
+
+
+const title = "Facundo Colavini - Frontend Web Developer with 6+ Years of Experience"
+const description = "Explore the portfolio of Facundo Colavini, a skilled Frontend Web Developer specializing in creating responsive and user-centered web applications. With expertise in HTML, CSS, JavaScript, and modern frameworks, I deliver high-performance websites that exceed client expectations."
 ---
 
-<Layout title="My Porfolio | Facundo Colavini">
+<Layout title={title} description={description}>
 	<SectionContainer id="experience" class=" pt-16 md:pt-36 relative">
 	<div 
 		class="w-full shrink-0 absolute  top-52 md:top-80  -z-50 rotate-[-7deg] py-[20px] blur-[150px] rounded-full h-[150px] lg:h-[150px] xl:h-[200px] 
