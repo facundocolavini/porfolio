@@ -4,7 +4,7 @@ import type { Timeline } from "@/interfaces/types";
 export const about: Timeline[] = [
     {
         icon: 'code',
-        title: `<h2 class='text-3xl md:text-4xl font-bold'>About</h2>`,
+        title: `<h2 class='text-3xl md:text-4xl font-bold'>About me</h2>`,
         company: "",
         isFragmentPeriod: true,
         period: `
