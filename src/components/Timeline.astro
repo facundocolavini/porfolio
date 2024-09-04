@@ -1,13 +1,14 @@
 ---
 import { experiences } from "@/constants/experience"
-import ExperienceItem from "./ExperienceItem.astro"
+import TimelineItem from "./TimelineItem.astro"
+ 
 
 
 ---
 <ol class="relative mt-40 md:mt-52 px-4 sm:px-8">
     {experiences.map((experience) => (
     <li class="">
-      <ExperienceItem {...experience} />
+      <TimelineItem {...experience} />
     </li>
   ))
 }

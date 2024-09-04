@@ -21,6 +21,9 @@ export interface Project {
     tags: string[];
     icons: string[];
     pillClass?: string[];
+    showBtnCode?:boolean;
+    isReversed:boolean;
+    bgGradient:string;
 }
 
  

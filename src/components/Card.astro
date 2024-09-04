@@ -1,38 +1,51 @@
 ---
 import { twMerge } from 'tailwind-merge';
-
 import type { Project } from '@/interfaces/types';
 import Pill from './Pill.astro';
 import { Icon } from 'astro-icon/components';
 
-
 interface Props {
-  isReversed?: boolean;
   project: Project;
 }
 
-const { isReversed = false, project} = Astro.props;
-const { title,description,image,previewUrl,tags,icons,pillClass} = project
+// Desestructuración del objeto `project`, asegurando que `isReversed` tenga un valor por defecto.
+const { project } = Astro.props;
+const { title, description, image, previewUrl, tags, icons, pillClass, showBtnCode, isReversed = false, bgGradient } = project;
 ---
 
 <div class="relative flex items-center justify-center p-4">
   <!-- Gradient Background -->
   <div 
-    class="absolute inset-0 -left-[30%] top-20 object-cover bg-gradient-to-r from-transparent via-[rgba(73,33,93,0.1)] to-[rgba(73,33,93,1)] blur-[80px] md:w-full  h-[350px] lg:inset-0 md:h-[350px] md:place-content-center lg:h-full w-full -z-20"
+    class={twMerge(`absolute inset-0 -left-[30%] top-20 object-cover ${bgGradient} blur-[80px] md:w-full h-[350px] lg:inset-0 md:h-[350px] md:place-content-center lg:h-full w-full -z-20`)}
     aria-hidden="true">
   </div>
 
   <div class="relative w-full max-w-5xl bg-[#1E1E2E]/30 rounded-3xl border-[#808080] border p-8 shadow-lg z-1">
-    <div class:list={[
-      "flex z-10 lg:flex-row flex-col-reverse items-start justify-between",
-      { 'lg:flex-row-reverse': isReversed },
-    ]}>
-      <div class="text-white md:mb-0 md:mr-8 flex-1 z-4">
-        <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">{title}</h1>
-        <div class=" flex gap-2 mb-4 flex-wrap">
+    <div class="flex flex-col lg:grid lg:grid-cols-2 gap-8 items-center">
+      
+      <!-- Imagen (Siempre arriba en pantallas pequeñas) -->
+      <div class={twMerge(
+        "w-full", 
+        isReversed ? "lg:order-2" : "lg:order-1"
+      )}>
+        <div class="relative w-full h-auto max-h-[400px] flex items-center justify-center">
+          <img src={`${image}`}
+            class="rounded-lg inset-5 drop-shadow-lg object-contain h-full z-1"
+            alt={title}
+          />
+        </div>
+      </div>
+
+      <!-- Contenido (Texto y Título) -->
+      <div class={twMerge(
+        "text-white flex-1 z-4",
+        isReversed ? "lg:order-1" : "lg:order-2"
+      )}>
+        <h1 class="text-2xl md:text-3xl lg:text-2xl font-bold mb-4">{title}</h1>
+        <div class="flex gap-2 mb-4 flex-wrap">
           {
             tags.map((tag, index) => (
-              <Pill  class={twMerge(`pl-1 pr-3 py-1 rounded-full flex items-center`,
+              <Pill class={twMerge(`pl-1 pr-3 py-1 rounded-full flex items-center`,
                 pillClass ? pillClass[index] : '')}>
                 <Icon name={icons[index].toLowerCase()} class={`h-4 w-4 mr-1 ml-2`}/>
                 {tag}
@@ -40,19 +53,24 @@ const { title,description,image,previewUrl,tags,icons,pillClass} = project
             ))
           }
         </div>
-        <p class="text-base md:text-sm lg:text-base mb-6">{description}</p>
-        <Pill href="#" class='bg-white text-black border-2 border-gray-300 rounded-full hover:bg-gray-300 transition focus:ring focus:ring-gray-400 w-fit flex items-center px-2 py-1 font-semibold cursor-pointer'>
-          Preview
-          <Icon name={'arrow-right'} class="h-4 w-4 mr-1 ml-2"/>
-        </Pill>
+        <p class="text-base md:text-md lg:text-lg mb-6 space-y-2">
+          <ul class="list-disc list-inside ">
+
+          <Fragment set:html={description}/>
+          </ul>
+        </p>
+        <div class="flex gap-2 mt-5">
+          {showBtnCode && <Pill variant="secondary" href="#" >
+            <Icon name={'brand-github'} class="size-4 "/>
+            Code
+          </Pill>}
+          <Pill href="#" variant="secondary">
+            <Icon name={'link'} class="h-4 w-4 "/>
+            Preview
+          </Pill>
+        </div>
       </div>
 
-      <div class="relative w-full lg:flex lg:w-1/2">
-        <img src={`${image}`}
-        
-          class="rounded-lg drop-shadow-lg z-1 h-full w-full" alt="Property Listings: Rentals & Sales Web App"
-        />
-      </div>
     </div>
   </div>
 </div>
