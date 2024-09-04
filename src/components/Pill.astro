@@ -13,10 +13,14 @@ const variantsPills: { [key: string]: string } = {
 };
 
 
-const { variant = 'primary' } = Astro.props;
+const { variant = 'primary',isLink=true } = Astro.props;
 
 ---
-<a
+
+ 
+{
+  isLink  ?
+  <a
   {...Astro.props}
   target="_blank"
   rel="noopener noreferrer"
@@ -28,4 +32,13 @@ const { variant = 'primary' } = Astro.props;
 >
   <slot />
 </a>
- 
+:
+ <span   
+  {...Astro.props}
+  class:list={[
+    'flex items-center justify-center px-4 py-2 text-sm font-medium rounded-full gap-1',
+    variant ? variantsPills[variant] : '', // Validar antes de acceder al objeto
+  ]}>
+      <slot />
+  </span>
+}

@@ -45,8 +45,8 @@ const { title, description, image, previewUrl, tags, icons, pillClass, showBtnCo
         <div class="flex gap-2 mb-4 flex-wrap">
           {
             tags.map((tag, index) => (
-              <Pill class={twMerge(`rounded-full flex items-center object-fill gap-2 px-3 py-1`,
-                pillClass ? pillClass[index] : '')}>
+              <Pill isLink={false} class={twMerge(`rounded-full flex items-center object-fill gap-2 px-3 py-1`,
+                pillClass ? pillClass[index] : '')} alt={tag} href="">
                 { icons[index] && <Icon name={icons[index].toLowerCase()} class={`size-4 object-cover aspect-square`}/>}
                 {tag}
               </Pill>
@@ -58,11 +58,11 @@ const { title, description, image, previewUrl, tags, icons, pillClass, showBtnCo
           
         </p>
         <div class="flex gap-2 mt-5">
-          {showBtnCode && <Pill variant="secondary" href="#" >
+          {showBtnCode && <Pill variant="secondary" href="#" alt="code" >
             <Icon name={'brand-github'} class="size-4"/>
             Code
           </Pill>}
-          <Pill href={previewUrl} variant="white">
+          <Pill href={previewUrl} variant="white" alt="preview project">
             <Icon name={'link'} class="size-4"/>
             Preview
           </Pill>
