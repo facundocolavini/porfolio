@@ -1,14 +1,19 @@
 ---
-import { experiences } from "@/constants/experience"
-import TimelineItem from "./TimelineItem.astro"
- 
 
+import TimelineItem from "./TimelineItem.astro"
+import type { Timeline } from "@/interfaces/types";
+
+interface Props {
+  list: Timeline[];
+}
+
+const {list } = Astro.props;
 
 ---
 <ol class="relative mt-40 md:mt-52 px-4 sm:px-8">
-    {experiences.map((experience) => (
+    {list.map((list:Timeline) => (
     <li class="">
-      <TimelineItem {...experience} />
+      <TimelineItem {...list} />
     </li>
   ))
 }

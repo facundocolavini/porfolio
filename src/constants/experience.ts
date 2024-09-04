@@ -1,4 +1,6 @@
-export const experiences = [
+import type { Timeline } from "@/interfaces/types";
+
+export const experiences: Timeline[] = [
   {
     icon: "circle",
     title: `<h2 class='text-3xl md:text-4xl font-bold'>Experience </h2>`,
@@ -21,6 +23,7 @@ export const experiences = [
     icon: 'astro-grey',
     title: `<h3 class=" text-xl md:text-2xl text-[#FF6B00] font-bold">Frontend Engineer</h3>`,
     company: "Sounthern Horizon",
+
     period: "March 2022 - present",
     description: "Specialize in crafting responsive interfaces using React and Astro, collaborating closely with backend and UX teams. Proficient in integrating with RESTful APIs such as Swagger and managing Node.js APIs.",
     color: "text-[#ADADAD]",
