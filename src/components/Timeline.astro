@@ -1,16 +1,18 @@
 ---
 
+import { twMerge } from "tailwind-merge";
 import TimelineItem from "./TimelineItem.astro"
 import type { Timeline } from "@/interfaces/types";
 
 interface Props {
   list: Timeline[];
+  class?: string;
 }
 
-const {list } = Astro.props;
+const {list , class:className} = Astro.props;
 
 ---
-<ol class="relative mt-40 md:mt-52 px-4 sm:px-8">
+<ol class={twMerge(`relative mt-40 md:mt-52 px-4`,className)}>
     {list.map((list:Timeline) => (
     <li class="">
       <TimelineItem {...list} />

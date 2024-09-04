@@ -8,7 +8,7 @@ export const about: Timeline[] = [
         company: "",
         isFragmentPeriod: true,
         period: `
-        
+      
         `,
         description: "",
         color: "text-[#808080]  ",
